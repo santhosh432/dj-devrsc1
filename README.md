@@ -6,7 +6,7 @@ virtualenv djenv
 
 source djenv/bin/active
 
-# got o project directory
+# go to project directory
 cd rscproject
 
 # install requirements
