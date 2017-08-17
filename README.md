@@ -17,4 +17,4 @@ pip install -r requirements.txt
 pip install --upgrade -r requirements.txt
 
 #run the server
-python manage.py runerver
+python manage.py runserver
