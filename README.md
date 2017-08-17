@@ -10,7 +10,7 @@ source djenv/bin/active
 cd rscproject
 
 # install requirements
-pip install requirements.txt
+pip install -r requirements.txt
 
 # if any error as "No matching distribution found for requirements.txt"
 
