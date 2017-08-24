@@ -1,0 +1,29 @@
+<html>
+<body>
+<br><br><br>
+
+<h2 align='center'>Online Test ADMIN PAGE 4.1</h2>
+
+<br><br><br>
+<div align='center' border=2>
+
+<h2 align='center'>Active the subjects for test </h2>
+<form action="{% url 'statusupdate' %}" method="POST">{% csrf_token %}
+<table border=2 width=60%>
+<tr><th>sl no</th><th>Technology</th><th>Time limit</th><th>current status</th><th>ID</th><th>Required status</th></tr>
+
+{% for s in getstatus %}
+
+<tr><td>{{ forloop.counter }}</td><td>{{ s.subjectname }} </td><td>{{ s.timelimit }}</td><td>{{ s.status }} </td><td><input type="text" name="stid" value="{{ s.id }}"> </td><td><select name="adstatus"><option>Active</option><option>Deactive</option></select></td></tr>
+
+{% endfor %}
+</table>
+
+<input type="submit" value="Submit">
+
+</form>
+
+</div>
+<p align=center>This page needs  to return current page</p>
+</body>
+</html>

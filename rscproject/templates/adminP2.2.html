@@ -1,0 +1,26 @@
+<html>
+<body>
+<br><br><br>
+{{ t1 }},{{ t2 }},{{ t3 }}
+<h2 align='center'>Online Test ADMIN PAGE 2.2</h2>
+
+<br><br><br>
+<div align='center' border=2>
+
+<h2 align='center'>Edit the name & time limit </h2>
+<form action="/loginverify/uptech/" method="POST">{% csrf_token %}
+<table border=2 width=60%>
+<tr><th>sl no</th><th>Technology</th><th>Time limit</th></tr>
+<tr><td>1.</td><td><input type="text" value="{{ t1 }}" name="upsub"> </td><td><input type="text" value="{{ t2 }}" name="uptimer"></td></tr>
+
+
+</table>
+<input type="hidden" value="{{ t3 }}" name="udtechid">
+<input type="submit" value="Submit">
+
+</form>
+
+</div>
+<p align=center>This page should return to previuos page</p>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<html>
+<body>
+
+
+{% if errors %}
+
+{% for er in errors %}
+
+{{ er }}
+{% endfor %}
+
+
+{% endif %}
+
+<h2 align='center'>Online Test ADMIN PAGE 3.1</h2>
+
+<br>
+
+<div align='center' border=2>
+
+<h2 align='center'>Enter questions and options </h2>
+
+<form action="{% url 'addquest' %}" method="POST">{% csrf_token %}
+<table border=2 width=60%>
+
+<tr><th>Question</th><td colspan=3><textarea rows=9 cols=90 name="question"></textarea></td><td>Select technology:<select name="tech"><option value="">Select</option>{%for tl in tech%}<option>{{ tl.subjectname }}</option>{% endfor %}</select> </td></tr>
+<tr><th>options</th><td><input type="text" name="a"> </td><td><input type="text" name="b"></td><td><input type="text" name="c"> </td><td><input type="text" name="d"> </td></tr>
+
+<tr><th> Right option</th><td colspan=4><select name="ro"> <option>A</option> <option>B</option><option>C</option><option>D</option></select> </td></tr>
+</table>
+<input type="submit" value="Submit">
+</form>
+
+
+
+<p align=center>After submitting this page needs  to return current page</p>
+
+
+
+<h2 align='center'>List of Questions </h2>
+<table border=2 width=60%>
+
+<tr><th>sl no</th><th>Technology</th><th>Question</th><th>option1</th><th>option2</th><th>option3</th><th>option4</th><th>Right option</th><th>Option</th><th>select checkbox for delete</th></tr>
+{% for q in que %}
+
+<tr><th>{{ forloop.counter }}</th><th>{{ q.subtype }}</th><th>{{ q.question }}</th><th>{{ q.a }}</th><th>{{ q.b }}</th><th>{{ q.c }}</th><th>{{ q.d }} </th><th>{{ q.ro }}</th><th><button>Edit</button></th><th><input type="checkbox"></th></tr>
+
+
+{% endfor %}
+</table>
+<input type="submit" value="Submit">
+
+<p align=center>This page should return to current page</p>
+
+
+</div>
+
+</body>
+</html>

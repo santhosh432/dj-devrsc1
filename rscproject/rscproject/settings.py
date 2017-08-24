@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'eh8@p!6b!p+vas@fb6s6y1km197#ki@lih+r*tpl#e8338-qc('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','127.0.0.1']
 
 
 # Application definition
@@ -55,7 +55,7 @@ ROOT_URLCONF = 'rscproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +70,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rscproject.wsgi.application'
 
+APPEND_SLASH = False
+LOGIN_REDIRECT_URL ='/users/account/'
+
+LOGIN_URL = '/users/login/'
+
+LOGOUT_URL = '/users/logout/'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -87,7 +93,7 @@ DATABASES = {
 
 '''
 
-
+# defualt database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
