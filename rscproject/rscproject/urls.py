@@ -17,6 +17,8 @@ from django.conf.urls import url
 from django.contrib import admin
 import django
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import login
+
 admin.autodiscover()
 
 from onlinetestapp import views
@@ -31,7 +33,8 @@ urlpatterns = [
     url(r'^registerpage/$', views.registration, name='register'),
     url(r'^adduser/$', views.add_user, name='adduser'),
     url(r'^loginverify/$', views.login_check, name='logincheck'),
-    url(r'^users/login/$', django.contrib.auth.views.login,{'template_name': 'login.html'},name='login'),
+    # url(r'^users/login/$', django.contrib.auth.views.login, {'template_name': 'login.html'}, name='login'),
+    url(r'^users/login/$', login, {'template_name': 'login.html'}, name='login'),
     #  url(r'^loginverify/options/$', views.admin_options, name='options'),
 
     url(r'^users/account/$', views.login_check, name='useraccount'),
