@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
+from __future__ import print_function
 from __future__ import unicode_literals
-
-from django.shortcuts import render
 
 # Create your views here.
 
 
 from django.shortcuts import render
 from django.shortcuts import redirect
-from django.http import HttpResponse
+
+from django.http import HttpResponseRedirect
+
 from models import *
 
 from forms import UserRegistrationForm, ExfinalForm
@@ -62,28 +63,30 @@ def add_user(request):
     address = request.POST.get("address")
     phone = request.POST.get("phone")
     tech = request.POST.get("tech")
-    print ".........address........", address
+    print ('.........address........', address)
     if request.method == 'GET':
-        print "get here"
+        print ('get here')
         form = UserRegistrationForm()  # object creation
     else:
+        print ('form in post')
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+            print ('user registration from valid')
             user = User.objects.create_user(username, email, password)
             user.first_name = fname
             user.last_name = lname
             user.save()
             a = UserProfile(user_id=user.id, address=address, phone=phone, tech=tech)
             a.save()
-            return redirect('/homepage')
+            print ('saved')
+            return HttpResponseRedirect('/homepage/')
     return render(request, 'registration.html', {'form': form, })
 
 
 def login_check(request):
     request.session['userid'] = request.user.id
 
-    print "user id:", request.session['userid']
-
+    print ("user id:", request.session['userid'])
     return render(request, "adminP2.html")
 
 
@@ -103,7 +106,7 @@ def add_tech(request):
             t = Techlist(subjectname=sub, timelimit=time)
             t.save()
 
-            return redirect('/loginverify/addtechnology', {'tech': listsub})
+            return redirect('/loginverify/addtechnology/', {'tech': listsub})
 
     return render(request, "adminP21.html", {'errors': errors, 'tech': listsub})
 
@@ -185,7 +188,7 @@ def updatetechlist(request):
     upt.timelimit = newtimer
     upt.save()
     listsub = Techlist.objects.all()
-    print listsub
+    print (listsub)
     return render(request, "adminP21.html", {'tech': listsub})
 
 
@@ -255,17 +258,17 @@ def acknowledgment(request):
     stuid = int(stid.id)
     sttech = stid.tech
     stemailid = authid.email
-    print request.POST
+    print (request.POST)
     val = dict(request.POST)
-    print val
+    print (val)
     keylist = val.keys()
-    print keylist
+    print (keylist)
     d = val
     stdackdet = Empanswerslist.objects.filter(empid=stuid)
 
     totque = Questionslist.objects.filter(Q(subtype="apt") | Q(subtype="Resoning") | Q(subtype=sttech)).count()
-    print totque
-    print d['orginalans']
+    print (totque)
+    print (d['orginalans'])
     answers_attempted = []
     score = 0
     c = 1
@@ -274,7 +277,7 @@ def acknowledgment(request):
 
     for h, i in (zip(d['orginalans'], d['question_id'])):
         o = "opt" + str(c)
-        print o
+        print (o)
         c = c + 1
         if o in keylist:
             s = d[o]
@@ -284,17 +287,17 @@ def acknowledgment(request):
         else:
             s = "N"
 
-        print "original Answer:", h, "user answer:", s, "Question ID:", i, sttech, stemailid
+        print ("original Answer:", h, "user answer:", s, "Question ID:", i, sttech, stemailid)
         stdack = Empanswerslist(empid=stuid, empanswer=s, originalanswer=h, empqueid=i, emptech=sttech,
-                                empmailid=stemailid, testid=tid)
+                                empmailid=stemailid, testid=1)
         stdack.save()
 
         if h == s:
             score = score + 1
 
     count_att = len(answers_attempted)
-    print score, count_att
-    print "#############################"
+    print (score, count_att)
+    print ("#############################")
 
     stdackdet = Empanswerslist.objects.filter(empid=stuid)
 
