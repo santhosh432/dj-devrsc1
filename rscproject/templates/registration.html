@@ -4,6 +4,7 @@
 <h1 align=center>Welcome to Registraion page</h1>
 
 <form action="{% url 'adduser' %}" method="POST" >{% csrf_token %}
+
     <table>
     <tr><td>{{form}}</td></tr>
 
