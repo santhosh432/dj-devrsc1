@@ -1,3 +1,13 @@
+Technologies :
+django
+python
+Mysql
+Html
+css
+bootstrap
+angularJS
+
+
 # dj-devrsc
 #create virtual environment
 virtualenv djenv
