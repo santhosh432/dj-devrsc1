@@ -8,6 +8,7 @@ bootstrap
 angularJS
 south
 
+etc..
 
 # dj-devrsc
 #create virtual environment
