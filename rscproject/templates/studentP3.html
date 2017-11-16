@@ -1,0 +1,209 @@
+<html>
+
+
+<style> 
+div {
+    -webkit-user-select: none; /* Chrome, Opera, Safari */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    user-select: none; /* Standard syntax */
+}
+
+p,h3
+{
+  text-align:left;
+}
+
+
+</style>
+
+
+
+
+<body >
+  <div>
+<br><br><br>
+
+<h2 align='center'>Online Test student PAGE 3</h2>
+It is {% now "jS F Y H:i" %}
+
+<h4>Student technology:{{ studenttech }},id :{{ stid }}</h4>
+
+<br><br><br>
+<h3 align='right'>Total time :{{ fronttimer }} min</h3>
+<h3 align='right'> Timer :<div id="hm_timer"><span id="future_date"><span></div></h3>
+<h3 align='right'>Total questions : </h3><br>
+<div align='center'>
+<form action="{% url 'acknowledgment' %}" method="POST">{% csrf_token %}
+
+<input type="hidden" name="empid" value = "{{ stid }}">
+
+<h2>Aptitude</h2>
+
+
+<table align='center' border=1 width=65%>
+
+{% for i in qeslist %}
+
+{% if i.subtype == "apt" %}
+
+
+  <tr>
+  <th valign="top">{{ forloop.counter }}</th><th><h3>{{ i.question }}</h3>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="A">{{ i.a }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="B">{{ i.b }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="C">{{ i.c }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="D">{{ i.d }}<br></p>
+
+  </th>
+   
+
+  <input type="hidden" name="orginalans" value="{{i.ro}}">
+
+  <input type="hidden" name="question_id" value="{{i.id}}">
+
+
+  </tr>
+
+
+{% endif %}
+{% endfor %}
+
+</table>
+
+<h2>Reasoning</h2>
+
+
+<table align='center' border=1 width=65%>
+
+{% for i in qeslist %}
+
+{% if i.subtype == "Resoning" %}
+
+
+  <tr>
+  <th valign="top">{{ forloop.counter }}</th><th><h3>{{ i.question }}</h3>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="A">{{ i.a }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="B">{{ i.b }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="C">{{ i.c }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="D">{{ i.d }}<br></p>
+
+  </th>
+   
+
+  <input type="hidden" name="orginalans" value="{{i.ro}}">
+
+  <input type="hidden" name="question_id" value="{{i.id}}">
+
+
+  </tr>
+
+
+{% endif %}
+{% endfor %}
+
+</table>
+
+<h2>Technology:{{ studenttech }} </h2>
+
+
+<table align='center' border=1 width=65%>
+
+{% for i in qeslist %}
+
+{% if i.subtype != "apt" and i.subtype != "Resoning"  %}
+
+	<tr>
+	<th valign="top">{{ forloop.counter }}</th><th><h3>{{ i.question }}</h3>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="A">{{ i.a }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="B">{{ i.b }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="C">{{ i.c }}<br></p>
+   <p><input type="radio" name="opt{{ forloop.counter }}" value="D">{{ i.d }}<br></p>
+
+  </th>
+	 
+
+	<input type="hidden" name="orginalans" value="{{i.ro}}">
+
+	<input type="hidden" name="question_id" value="{{i.id}}">
+
+
+	</tr>
+
+
+
+{% endif %}
+{% endfor %}
+
+
+
+</table>
+
+
+
+	<!--<th><input type="text" name="techtype" value="{{i.subtype}}"></th>-->
+
+{% comment %}
+<div class="pagination" align='center'>
+      <span class="step-links" align='center'><h3>
+        {% if qeslist.has_previous %}
+            <a href="?page={{ qeslist.previous_page_number }}"><b>Previous</b></a>
+        {% endif %}
+
+        <span class="current" align='center'>
+            <b>Page {{ qeslist.number }} of {{ qeslist.paginator.num_pages }}.</b>
+        </span>
+
+        {% if qeslist.has_next %}
+            <a href="?page={{ qeslist.next_page_number }}"><b>Next</b></a>
+        {% endif %} </h3>
+     </span>
+</div>
+{% endcomment %}
+
+
+<br>
+<a href="/acknowledgment"><button align='center'>Submit</button></a>
+
+
+
+
+
+
+</form>
+
+
+
+
+{% comment %}
+
+<button align='left'>Previous</button>   <button align='right'>Next</button><br>
+
+
+<p>formset***************************************</p>
+
+<form method="post" action="">
+	    {% csrf_token %} 
+    <table border=1>
+    	<tr><th>sl no </th> 
+    		<th>empid</th>
+    		<th> empmailid </th>
+
+    	</tr>
+        {% for form in formset %}
+           <tr><td>{{ forloop.counter }}</td>
+           	   <td>{{ form.empid }} </td>
+           	   <td>{{ form.empmailid }} </td>
+           </tr>
+        {% endfor %}
+    </table>
+<a href="/acknowledgment"><button align='center'>Submit</button></a>
+{% endcomment %}
+
+</form>
+
+</div>
+  </div>
+
+</body>
+</html>

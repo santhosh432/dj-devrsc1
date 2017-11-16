@@ -1,0 +1,60 @@
+<html>
+	<head>
+
+		<script>
+		window.location.hash="no-back-button";
+		window.location.hash="Again-No-back-button";//again because google chrome don't insert first hash into history
+		window.onhashchange=function(){window.location.hash="no-back-button";}
+		</script> 
+
+	</head>
+
+<body>
+<br><br><br>
+User:{{ usermail }}
+<h2 align='center'>Online Test student PAGE 4</h2>
+
+<br><br><br>
+<h3 align='right'>Total time :60 min</h3><br>
+{% comment %}
+
+<div align='center'>
+<table align='center' border=1 width=65%>
+{{ message }}
+<tr><th>Name</th><th>Tech</th><th>Total number of questions</th><th>Total number of questions attempted</th></tr>
+
+{% for st in stdet %}
+<tr><td>{{ st.empqueid }},id :{{ st.empid }}</td><td>{{ st.emptech }}</td><td>20</td><td>40</td></tr>
+
+{% endfor %}
+</table>
+</div>
+
+{% endcomment %}
+
+{% csrf_token %}
+
+<div align='center'>
+<table align='center' border=1 width=65%>
+{{ message }}
+		<tr>
+			<th>Name</th><th>Tech</th><th>Total Questions</th><th>Total Attempted</th>
+			<th>Correct Answered</th>
+		</tr>
+
+		<tr>
+			<td>{{ stuid }}</td><td>{{ sttech }}</td><td>{{ totquestions }}</td><td>{{ attempted }}</td><td>{{ score }}</td>
+		</tr>
+
+</table>
+</div>
+
+
+
+
+<br><br><br><br>
+<h2 align='center'>You have successfully submitted your test</h2>
+
+
+</body>
+</html>

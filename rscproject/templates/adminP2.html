@@ -1,0 +1,51 @@
+<html>
+<body>
+<br><br><br>
+
+{% if user.id == 1 %}
+
+<h2 align='center'>Online Test ADMIN PAGE 2</h2>
+
+<br><br><br>
+<div align='center' border=2>
+<table border=2 width=60%>
+<tr><td>1.</td><td><u><a href="/loginverify/addtechnology/">ADD Technology</a></u></td></tr>
+<tr><td>2.</td><td><u><a href="/loginverify/enterques/">Enter questions </a></u></td></tr>
+<tr><td>3.</td><td><u><a href="/loginverify/status/">Active the subjects for test</a></u></td></tr>
+<tr><td>4.</td><td><u><a href="/loginverify/results/">Get the list of student results</a></u></td></tr>
+
+</table>
+
+{% endif %}
+
+{% if user.id != 1 %}
+
+
+
+
+<h2 align='center'>Online Test student PAGE 2</h2>
+<h4>User name :{{ user.first_name }}{{ user.last_name }}</h4>
+<h4>User tech :{{ user.id }}</h4>
+<br><br><br>
+<h3 align='center'>Instructions for student</h3>
+<div align='center'>
+<table align='center' border=1>
+<tr><th>Sl no</th><th>Instructions</th></tr>
+<tr><td>1</td><td>The limit for test is 60 min</td></tr>
+<tr><td>2</td><td>No negetive marks</td></tr>
+
+</table>
+<form action="{% url 'starttest' %}" method="POST">
+	{% csrf_token %}
+
+<input type="hidden"  value="{{ user.id }}" name="stuid">
+<input type="submit" align='center' value="Click here to start the Test"><br>
+</form>
+{% endif %}
+
+
+
+</div>
+
+</body>
+</html>

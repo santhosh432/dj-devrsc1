@@ -25,7 +25,7 @@ SECRET_KEY = 'eh8@p!6b!p+vas@fb6s6y1km197#ki@lih+r*tpl#e8338-qc('
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*','127.0.0.1']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'onlinetestapp',
 ]
 
 MIDDLEWARE = [
@@ -54,7 +55,7 @@ ROOT_URLCONF = 'rscproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,16 +70,39 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'rscproject.wsgi.application'
 
+APPEND_SLASH = False
+LOGIN_REDIRECT_URL ='/users/account/'
+
+LOGIN_URL = '/users/login/'
+
+LOGOUT_URL = '/users/logout/'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'rscdb',
+        'USER':'root',
+        'PASSWORD':'yskroot',
+        'HOST':'localhost',
+        'PORT':3306,
+    }
+}
+
+'''
+
+# defualt database
+DATABASES = {
+    'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+
+'''
 
 
 # Password validation
@@ -118,3 +142,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.normpath(os.path.join(BASE_DIR, "static"))

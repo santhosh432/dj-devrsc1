@@ -1,0 +1,66 @@
+<html>
+<body>
+<br><br><br>
+
+{% if errors %}
+{% for e in errors%}
+{{ e }}
+{% endfor %}
+
+
+
+
+{% endif%}
+<h2 align='center'>Online Test ADMIN PAGE 2.1</h2>
+
+<br><br><br>
+<h2 align='center'>ADD Technologies</h2>
+<div align='center' border=2>
+
+<form action="{% url 'addtech' %}" method="POST">{% csrf_token %}
+<table border=2 width=60%>
+<tr><td>1.</td><td>Enter Technology</td><td><input type="text" name="subject"></td></tr>
+<tr><td>2.</td><td>Enter Time limit</td><td><select name="timelimit"><option value="">select time limit</option><option>10</option>
+                                                    <option>20</option>
+                                                    <option>30</option>
+                                                    </select></td></tr>
+
+</table>
+<input type="submit" value="Submit"> 
+</form>
+<br>
+<h3 align='center'>List of technologies with time limit</h3>
+<form action="{% url 'edittech' %}" method="POST">{% csrf_token %}
+<table border=2 width=60%>
+
+
+<tr><th>sl no</th><th>Technology</th><th>Time limit</th><th>option</th></tr>
+{% for t in tech %}
+<tr>
+<td>{{ forloop.counter }}</td>
+<td>{{ t.subjectname }} </td><td>{{ t.timelimit }} </td>
+<td> <input type="submit" value="Edit" ></td>
+<td><input type="hidden" name="techid" value="{{ t.id }}"></td>
+</tr>
+
+
+
+
+{% comment %}
+
+<td> <a href="/loginverify/edittech/{{ t.id }}/"><input type="submit" value="Edit"></a></td></tr>
+
+
+{% endcomment %}
+
+{% endfor %}
+
+</table>
+</form>
+
+
+
+</div>
+
+</body>
+</html>
